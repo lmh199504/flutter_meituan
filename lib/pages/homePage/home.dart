@@ -21,6 +21,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
   }
 
+  _refresh() {
+    print('刷新');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,11 +77,32 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
               Container(
                 margin: EdgeInsets.only(left: 10),
-                width: 25,
-                height: 25,
+                width: 20,
+                height: 20,
                 child: Image.asset('lib/images/search.png'),
               )
             ],
+          ),
+        ),
+      ),
+      floatingActionButton: InkWell(
+        onTap: _refresh,
+        child: Container(
+          width: 25,
+          height: 25,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                    offset: Offset(2, 1), //x,y轴
+                    color: Colors.grey, //投影颜色
+                    blurRadius: 5 //投影距离
+                    )
+              ]),
+          child: Icon(
+            Icons.refresh,
+            color: Colors.blue,
           ),
         ),
       ),
