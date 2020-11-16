@@ -9,7 +9,7 @@ class Find extends StatefulWidget {
   _FindState createState() => _FindState();
 }
 
-class _FindState extends State<Find> {
+class _FindState extends State<Find> with AutomaticKeepAliveClientMixin {
   List list = [];
   Future onRefresh() {
     return Future.delayed(Duration(seconds: 1), () {
@@ -22,6 +22,9 @@ class _FindState extends State<Find> {
 
   bool isLoading = false;
   ScrollController scrollController = ScrollController();
+
+  @override
+  bool get wantKeepAlive => true;
   // List<NewsViewModel> list = List.from(newsList);
   @override
   void initState() {

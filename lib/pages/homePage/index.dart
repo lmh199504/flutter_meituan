@@ -15,10 +15,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   List<Widget> tabList = [Home(), Find(), null, Messaage(), Mine()];
+
+  var _pageController = PageController();
   tabBottom(index) {
     if (index != 2) {
       this.setState(() {
         this._currentIndex = index;
+        _pageController.jumpToPage(index);
       });
     } else {
       print('发布消息');
@@ -45,7 +48,11 @@ class _HomePageState extends State<HomePage> {
         ),
         preferredSize: Size.fromHeight(0.0),
       ),
-      body: tabList[_currentIndex],
+      // body: tabList[_currentIndex],
+      body: PageView(
+        controller: _pageController,
+        children: tabList,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: this._currentIndex,

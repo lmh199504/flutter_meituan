@@ -7,7 +7,8 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _HomeState extends State<Home>
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
 
   @override
@@ -25,6 +26,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     print('刷新');
   }
 
+  @override
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
