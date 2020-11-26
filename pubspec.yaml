@@ -60,6 +60,10 @@ flutter:
     - lib/images/2.jpg
     - lib/images/3.jpg
     - lib/images/4.jpg
+    - lib/images/addFriend.png
+    - lib/images/bell.png
+    - lib/images/fans.png
+    - lib/images/Message.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

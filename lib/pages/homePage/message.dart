@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'messageData.dart';
+import 'replayData.dart';
 
 class Messaage extends StatefulWidget {
   Messaage({Key key}) : super(key: key);
@@ -9,11 +10,14 @@ class Messaage extends StatefulWidget {
 }
 
 class _MessaageState extends State<Messaage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
   List messageList = messageData;
 
   int _currentIndex = 1;
+
+  @override
+  bool get wantKeepAlive => true;
   @override
   void initState() {
     super.initState();
@@ -40,15 +44,15 @@ class _MessaageState extends State<Messaage>
       ),
       ListTile(
         leading: Container(
-          width: 60,
-          height: 60,
+          width: 56,
+          height: 56,
           decoration: BoxDecoration(
             color: Color(0xfffce632),
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(28),
           ),
           child: Transform(
             transform: Matrix4.rotationZ(0.5),
-            origin: Offset(30, 30),
+            origin: Offset(28, 28),
             child: Icon(
               Icons.send_outlined,
               size: 30,
@@ -64,11 +68,14 @@ class _MessaageState extends State<Messaage>
     for (int i = 0; i < this.messageList.length; i++) {
       list.add(ListTile(
         leading: Container(
-          width: 60,
-          height: 60,
+          width: 56,
+          height: 56,
           decoration: BoxDecoration(
             color: Color(0xfffce632),
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(28),
+            // image: DecorationImage(
+            //     image: AssetImage(messageList[i]['avator']),
+            //     fit: BoxFit.contain),
           ),
           child: ClipOval(
             child: Image.asset(
@@ -89,11 +96,33 @@ class _MessaageState extends State<Messaage>
     return list;
   }
 
+  List<Widget> getReplayList() {
+    return replayData
+        .map((e) => ListTile(
+              leading: Container(
+                width: 56,
+                height: 56,
+                child: ClipOval(
+                  child: Image.asset(
+                    '${e['avator']}',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              title: Text('@${e['username']}评论了：'),
+              subtitle: Text('${e['lastMessage']}\n${e['time']}'),
+              trailing: Image.asset('${e['trailing']}'),
+            ))
+        .toList();
+  }
+
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
           child: AppBar(
+            elevation: 0,
             backgroundColor: Colors.white,
             title: Stack(
               children: [
@@ -138,8 +167,9 @@ class _MessaageState extends State<Messaage>
         ListView(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 10),
+              // margin: EdgeInsets.only(top: 10),
               padding: EdgeInsets.all(10),
+              color: Colors.white,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -149,11 +179,13 @@ class _MessaageState extends State<Messaage>
                         Container(
                           width: 40,
                           height: 40,
+                          padding: EdgeInsets.all(10),
                           margin: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.red,
+                            color: Color(0xfffc6a7b),
                           ),
+                          child: Image.asset('lib/images/bell.png'),
                         ),
                         Text('小右通知')
                       ],
@@ -165,13 +197,15 @@ class _MessaageState extends State<Messaage>
                         Container(
                           width: 40,
                           height: 40,
+                          padding: EdgeInsets.all(10),
                           margin: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.red,
+                            color: Color(0xff42aefe),
                           ),
+                          child: Image.asset('lib/images/Message.png'),
                         ),
-                        Text('小右通知')
+                        Text('收到的@')
                       ],
                     ),
                   ),
@@ -181,13 +215,15 @@ class _MessaageState extends State<Messaage>
                         Container(
                           width: 40,
                           height: 40,
+                          padding: EdgeInsets.all(10),
                           margin: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.red,
+                            color: Color(0xff46d7aa),
                           ),
+                          child: Image.asset('lib/images/fans.png'),
                         ),
-                        Text('小右通知')
+                        Text('新增粉丝')
                       ],
                     ),
                   ),
@@ -197,18 +233,29 @@ class _MessaageState extends State<Messaage>
                         Container(
                           width: 40,
                           height: 40,
+                          padding: EdgeInsets.all(10),
                           margin: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.red,
+                            color: Color(0xfffda160),
                           ),
                           // child:Icon ,
+                          child: Image.asset('lib/images/addFriend.png'),
                         ),
-                        Text('小右通知')
+                        Text('好友请求')
                       ],
                     ),
                   )
                 ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: [...this.getReplayList()],
               ),
             )
           ],

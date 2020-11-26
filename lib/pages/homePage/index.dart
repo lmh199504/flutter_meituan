@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
       ),
       // body: tabList[_currentIndex],
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: tabList,
       ),
@@ -80,16 +81,18 @@ class _HomePageState extends State<HomePage> {
               label: '发现'),
           BottomNavigationBarItem(
             icon: Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.only(top: 10),
+              height: 30,
+              width: 30,
+              // margin: EdgeInsets.only(top: 10),
+              // padding: EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Color(0xff1695e1),
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.white,
               ),
               child: Icon(
-                Icons.add,
-                color: Colors.white,
+                Icons.add_circle,
+                size: 40,
+                color: Color(0xff1695e1),
               ),
             ),
             label: '',

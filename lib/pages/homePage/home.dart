@@ -29,6 +29,7 @@ class _HomeState extends State<Home>
   @override
   bool get wantKeepAlive => true;
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -91,8 +92,8 @@ class _HomeState extends State<Home>
       floatingActionButton: InkWell(
         onTap: _refresh,
         child: Container(
-          width: 25,
-          height: 25,
+          width: 35,
+          height: 35,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
@@ -106,6 +107,7 @@ class _HomeState extends State<Home>
           child: Icon(
             Icons.refresh,
             color: Colors.blue,
+            size: 30,
           ),
         ),
       ),

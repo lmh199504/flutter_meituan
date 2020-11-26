@@ -145,7 +145,10 @@ class _FindState extends State<Find> with AutomaticKeepAliveClientMixin {
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width - 40;
+    print(width);
     return Scaffold(
         appBar: PreferredSize(
           child: AppBar(
@@ -178,7 +181,7 @@ class _FindState extends State<Find> with AutomaticKeepAliveClientMixin {
                 children: [
                   Container(
                     height: 160,
-                    width: 130,
+                    width: width / 3,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.red,
@@ -189,7 +192,7 @@ class _FindState extends State<Find> with AutomaticKeepAliveClientMixin {
                   ),
                   Container(
                     height: 160,
-                    width: 130,
+                    width: width / 3,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.red,
@@ -200,7 +203,7 @@ class _FindState extends State<Find> with AutomaticKeepAliveClientMixin {
                   ),
                   Container(
                     height: 160,
-                    width: 130,
+                    width: width / 3,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.red,

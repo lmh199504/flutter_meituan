@@ -17,3 +17,10 @@ class _MineState extends State<Mine> {
     );
   }
 }
+
+
+
+
+
+
+
